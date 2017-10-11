@@ -16,6 +16,12 @@ export class DashboardComponent implements OnInit {
       new Book('000', 'Angular', 'Grundlagen.. Best Practices', 5),
       new Book('111', 'AngularJS', 'Einführung in AngularJS')
     ];
+
+    this.reorderBooks();
+  }
+
+  reorderBooks() {
+    this.books.sort((a, b) => b.rating - a.rating);
   }
 
 }

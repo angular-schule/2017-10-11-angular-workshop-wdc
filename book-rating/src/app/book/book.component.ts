@@ -1,27 +1,28 @@
-import { Book } from './../shared/book';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+
+import { Book } from '../shared/book';
 
 @Component({
   selector: 'br-book',
   templateUrl: './book.component.html',
   styleUrls: ['./book.component.scss']
 })
-export class BookComponent implements OnInit {
+export class BookComponent  {
 
-  // Gegenstück [Property-Bindings]
+  // Gegenstück: (rated)="" (Event Binding)
+  @Output() rated = new EventEmitter<Book>();
+
+  // Gegenstück: [book]="" (Property Binding)
   @Input() book: Book;
-
-  constructor() { }
-
-  ngOnInit() {
-  }
 
   rateUp() {
     this.book.rateUp();
+    this.rated.emit(this.book);
   }
 
   rateDown() {
     this.book.rateDown();
+    this.rated.emit(this.book);
   }
 
   getStars() {
