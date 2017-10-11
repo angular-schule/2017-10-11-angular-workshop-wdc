@@ -8,14 +8,17 @@ import { BookStoreService } from './../shared/book-store.service';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  books: Book[];
+  books: Book[] = [];
 
   constructor(private bs: BookStoreService) {
   }
 
   ngOnInit() {
-    this.books = this.bs.getAllStatic();
-    this.reorderBooks();
+    this.bs.getAll()
+      .subscribe(books => {
+        this.books = books;
+        this.reorderBooks();
+      });
   }
 
   reorderBooks() {
